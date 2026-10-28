@@ -4,6 +4,7 @@
 
 void do_next_op(char operator, double right_operand, double *accumulator)
 {
+    // Selveste regnemaskinen bestående af et switch-statement. Hver operator har sin egen case, og få af casesne har undtagelser.
     switch (operator)
     {
     case '+':
@@ -18,14 +19,14 @@ void do_next_op(char operator, double right_operand, double *accumulator)
     case '/':
         if (right_operand == 0)
         {
-            break;
+            break; // Ingen division med 0.
         }
         *accumulator /= right_operand;
         break;
     case '^':
         if (right_operand == 0)
         {
-            *accumulator = 1;
+            *accumulator = 1; // Et tal opløftet i 0 giver 1.
             break;
         }
         *accumulator = pow(*accumulator, right_operand);
@@ -33,21 +34,12 @@ void do_next_op(char operator, double right_operand, double *accumulator)
     case '#':
         if (*accumulator < 0)
         {
-            break;
+            break; // Ingen kvadratrod på negative tal, som opgavebeskrivelsen beder om.
         }
         *accumulator = sqrt(*accumulator);
         break;
     case '%':
-        if (*accumulator < 0)
-        {
-            *accumulator = -*accumulator;
-            break;
-        }
-        else
-        {
-            *accumulator -= (*accumulator * 2);
-            break;
-        }
+        *accumulator = -*accumulator; // Sætter minus foran accumulatoren. så hvis den pt er -25 --> -(-25) = 25
         break;
     case '!':
         if (*accumulator == 0)
@@ -57,6 +49,6 @@ void do_next_op(char operator, double right_operand, double *accumulator)
         *accumulator = 1 / *accumulator;
         break;
     default:
-        printf("Invalid operator");
+        printf("Invalid operator"); // Kun de ovenstående operators er gyldige på denne lommeregner.
     }
 }
